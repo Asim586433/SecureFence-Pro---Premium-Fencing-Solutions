@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureFence Pro | Premium Fencing Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
         :root {
@@ -14,6 +15,9 @@
             --dark: #212529;
             --gray: #6c757d;
             --border: #dee2e6;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
         }
         
         * {
@@ -124,6 +128,7 @@
             flex-direction: column;
             align-items: center;
             font-size: 0.9rem;
+            cursor: pointer;
         }
         
         .header-action i {
@@ -271,6 +276,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
+            cursor: pointer;
         }
         
         .category-card:hover {
@@ -355,6 +361,11 @@
             font-size: 0.9rem;
             flex: 1;
             margin-right: 10px;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--secondary);
         }
         
         .view-details {
@@ -363,6 +374,11 @@
             padding: 8px 15px;
             border-radius: 4px;
             font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .view-details:hover {
+            background: #e9ecef;
         }
         
         /* Bundle Section */
@@ -527,6 +543,7 @@
             background: none;
             font-size: 1.5rem;
             color: var(--gray);
+            cursor: pointer;
         }
         
         .modal-body {
@@ -586,16 +603,28 @@
             align-items: center;
             justify-content: center;
             border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .quantity-btn:hover {
+            background: #e9ecef;
         }
         
         .quantity {
             margin: 0 10px;
+            font-weight: 600;
         }
         
         .remove-item {
             color: #dc3545;
             background: none;
             font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .remove-item:hover {
+            color: #bd2130;
         }
         
         .cart-total {
@@ -613,6 +642,11 @@
             border-radius: 4px;
             font-size: 1rem;
             font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background: var(--secondary);
         }
         
         /* Product Detail */
@@ -648,6 +682,7 @@
             border-radius: 4px;
             cursor: pointer;
             border: 2px solid transparent;
+            transition: border 0.3s;
         }
         
         .thumbnail.active {
@@ -702,6 +737,11 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 15px;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart-large:hover {
+            background: var(--secondary);
         }
         
         /* Page Content */
@@ -762,11 +802,16 @@
             border-radius: 4px;
             font-size: 0.9rem;
             cursor: pointer;
+            transition: all 0.3s;
         }
         
         .filter-option.active {
             background: var(--primary);
             color: white;
+        }
+        
+        .filter-option:hover:not(.active) {
+            background: #e9ecef;
         }
         
         /* Contact Form */
@@ -793,6 +838,12 @@
             border: 1px solid var(--border);
             border-radius: 4px;
             font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
         }
         
         textarea.form-control {
@@ -881,6 +932,37 @@
             border-top: 2px solid var(--border);
         }
         
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1001;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -919,6 +1001,10 @@
             .checkout-content {
                 grid-template-columns: 1fr;
             }
+            
+            .bundle-products {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -928,12 +1014,12 @@
         <div class="top-bar">
             <div class="container">
                 <div class="contact-info">
-                    <span>📞 1-800-FENCE-PRO</span>
-                    <span>✉️ support@securefencepro.com</span>
+                    <span><i class="fas fa-phone"></i> 1-800-FENCE-PRO</span>
+                    <span><i class="fas fa-envelope"></i> support@securefencepro.com</span>
                 </div>
                 <div class="account-links">
-                    <a href="account.html">My Account</a> | 
-                    <a href="tracking.html">Order Tracking</a>
+                    <a href="#" id="account-link"><i class="fas fa-user"></i> My Account</a> | 
+                    <a href="#" id="tracking-link"><i class="fas fa-truck"></i> Order Tracking</a>
                 </div>
             </div>
         </div>
@@ -945,17 +1031,17 @@
                     
                     <div class="search-bar">
                         <input type="text" placeholder="Search for fencing products...">
-                        <button>Search</button>
+                        <button><i class="fas fa-search"></i></button>
                     </div>
                     
                     <div class="header-actions">
-                        <div class="header-action">
-                            <i>👤</i>
+                        <div class="header-action" id="account-action">
+                            <i class="fas fa-user"></i>
                             <span>Account</span>
                         </div>
                         <div class="header-action">
-                            <div class="cart-icon">
-                                <i>🛒</i>
+                            <div class="cart-icon" id="cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
                                 <span class="cart-count">0</span>
                             </div>
                             <span>Cart</span>
@@ -968,22 +1054,22 @@
         <nav>
             <div class="container">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
                     <li>
-                        <a href="categories.html">Products ▾</a>
+                        <a href="#" class="nav-link" data-page="categories">Products <i class="fas fa-chevron-down"></i></a>
                         <div class="dropdown">
-                            <a href="category.html?cat=chain-link">Chain Link Fencing</a>
-                            <a href="category.html?cat=vinyl">Vinyl Fencing</a>
-                            <a href="category.html?cat=aluminum">Aluminum Fencing</a>
-                            <a href="category.html?cat=wood">Wood Fencing</a>
-                            <a href="category.html?cat=accessories">Fencing Accessories</a>
+                            <a href="#" class="category-link" data-category="chain-link">Chain Link Fencing</a>
+                            <a href="#" class="category-link" data-category="vinyl">Vinyl Fencing</a>
+                            <a href="#" class="category-link" data-category="aluminum">Aluminum Fencing</a>
+                            <a href="#" class="category-link" data-category="wood">Wood Fencing</a>
+                            <a href="#" class="category-link" data-category="accessories">Fencing Accessories</a>
                         </div>
                     </li>
-                    <li><a href="bundles.html">Packages & Bundles</a></li>
-                    <li><a href="installation.html">Installation Services</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" class="nav-link" data-page="bundles">Packages & Bundles</a></li>
+                    <li><a href="#" class="nav-link" data-page="installation">Installation Services</a></li>
+                    <li><a href="#" class="nav-link" data-page="resources">Resources</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -998,7 +1084,7 @@
                 <div class="container">
                     <h1>Premium Fencing Solutions for Every Property</h1>
                     <p>High-quality chain link, vinyl, and aluminum fencing with professional installation services. Create the perfect boundary for your home or business.</p>
-                    <a href="bundles.html" class="btn btn-primary">Shop Fencing Packages</a>
+                    <a href="#" class="btn btn-primary" id="hero-shop-btn">Shop Fencing Packages</a>
                 </div>
             </section>
 
@@ -1011,30 +1097,30 @@
                     </div>
                     
                     <div class="categories">
-                        <div class="category-card">
+                        <div class="category-card" data-category="chain-link">
                             <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
                             <div class="category-content">
                                 <h3>Chain Link Packages</h3>
                                 <p>Durable and affordable fencing solutions</p>
-                                <a href="category.html?cat=chain-link" class="btn">Shop Now</a>
+                                <a href="#" class="btn category-link" data-category="chain-link">Shop Now</a>
                             </div>
                         </div>
                         
-                        <div class="category-card">
+                        <div class="category-card" data-category="vinyl">
                             <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
                             <div class="category-content">
                                 <h3>Vinyl Fencing</h3>
                                 <p>Low-maintenance and elegant designs</p>
-                                <a href="category.html?cat=vinyl" class="btn">Shop Now</a>
+                                <a href="#" class="btn category-link" data-category="vinyl">Shop Now</a>
                             </div>
                         </div>
                         
-                        <div class="category-card">
+                        <div class="category-card" data-category="aluminum">
                             <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
                             <div class="category-content">
                                 <h3>Aluminum Fencing</h3>
                                 <p>Strong, rust-resistant and decorative options</p>
-                                <a href="category.html?cat=aluminum" class="btn">Shop Now</a>
+                                <a href="#" class="btn category-link" data-category="aluminum">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -1050,57 +1136,7 @@
                     </div>
                     
                     <div class="products">
-                        <div class="product-card">
-                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                            <div class="product-content">
-                                <div class="product-category">Chain Link</div>
-                                <h3 class="product-title">6ft Black Vinyl-Coated Chain Link Fence</h3>
-                                <div class="product-price">$18.50 / linear ft</div>
-                                <div class="product-actions">
-                                    <button class="add-to-cart" data-id="1">Add to Cart</button>
-                                    <button class="view-details" data-id="1">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                            <div class="product-content">
-                                <div class="product-category">Vinyl</div>
-                                <h3 class="product-title">Privacy Picket Vinyl Fence - 6ft Height</h3>
-                                <div class="product-price">$32.75 / linear ft</div>
-                                <div class="product-actions">
-                                    <button class="add-to-cart" data-id="2">Add to Cart</button>
-                                    <button class="view-details" data-id="2">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                            <div class="product-content">
-                                <div class="product-category">Aluminum</div>
-                                <h3 class="product-title">Ornamental Aluminum Fence - Black</h3>
-                                <div class="product-price">$45.20 / linear ft</div>
-                                <div class="product-actions">
-                                    <button class="add-to-cart" data-id="3">Add to Cart</button>
-                                    <button class="view-details" data-id="3">Details</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="product-card">
-                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                            <div class="product-content">
-                                <div class="product-category">Accessories</div>
-                                <h3 class="product-title">Heavy Duty Gate with Latch - 4ft Width</h3>
-                                <div class="product-price">$189.99</div>
-                                <div class="product-actions">
-                                    <button class="add-to-cart" data-id="4">Add to Cart</button>
-                                    <button class="view-details" data-id="4">Details</button>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Products will be dynamically loaded -->
                     </div>
                 </div>
             </section>
@@ -1176,10 +1212,10 @@
             <div class="page-header">
                 <div class="container">
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> > <a href="categories.html">Products</a> > <span id="category-name">Chain Link Fencing</span>
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <a href="#" class="nav-link" data-page="categories">Products</a> > <span id="category-name">Chain Link Fencing</span>
                     </div>
                     <h1 id="category-title">Chain Link Fencing</h1>
-                    <p>Durable, affordable, and versatile fencing solutions for residential and commercial properties.</p>
+                    <p id="category-description">Durable, affordable, and versatile fencing solutions for residential and commercial properties.</p>
                 </div>
             </div>
             
@@ -1188,34 +1224,34 @@
                     <div class="filter-group">
                         <h3>Height</h3>
                         <div class="filter-options">
-                            <div class="filter-option active">All</div>
-                            <div class="filter-option">4 ft</div>
-                            <div class="filter-option">5 ft</div>
-                            <div class="filter-option">6 ft</div>
+                            <div class="filter-option active" data-filter="height" data-value="all">All</div>
+                            <div class="filter-option" data-filter="height" data-value="4">4 ft</div>
+                            <div class="filter-option" data-filter="height" data-value="5">5 ft</div>
+                            <div class="filter-option" data-filter="height" data-value="6">6 ft</div>
                         </div>
                     </div>
                     
                     <div class="filter-group">
                         <h3>Coating</h3>
                         <div class="filter-options">
-                            <div class="filter-option active">All</div>
-                            <div class="filter-option">Vinyl Coated</div>
-                            <div class="filter-option">Galvanized</div>
+                            <div class="filter-option active" data-filter="coating" data-value="all">All</div>
+                            <div class="filter-option" data-filter="coating" data-value="vinyl">Vinyl Coated</div>
+                            <div class="filter-option" data-filter="coating" data-value="galvanized">Galvanized</div>
                         </div>
                     </div>
                     
                     <div class="filter-group">
                         <h3>Color</h3>
                         <div class="filter-options">
-                            <div class="filter-option active">All</div>
-                            <div class="filter-option">Black</div>
-                            <div class="filter-option">Green</div>
-                            <div class="filter-option">Silver</div>
+                            <div class="filter-option active" data-filter="color" data-value="all">All</div>
+                            <div class="filter-option" data-filter="color" data-value="black">Black</div>
+                            <div class="filter-option" data-filter="color" data-value="green">Green</div>
+                            <div class="filter-option" data-filter="color" data-value="silver">Silver</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="products">
+                <div class="products" id="category-products">
                     <!-- Products will be dynamically loaded based on category -->
                 </div>
             </div>
@@ -1226,7 +1262,7 @@
             <div class="page-header">
                 <div class="container">
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> > <span>About Us</span>
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <span>About Us</span>
                     </div>
                     <h1>About SecureFence Pro</h1>
                     <p>Your trusted partner in premium fencing solutions since 2005</p>
@@ -1280,7 +1316,7 @@
             <div class="page-header">
                 <div class="container">
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> > <span>Contact Us</span>
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <span>Contact Us</span>
                     </div>
                     <h1>Contact SecureFence Pro</h1>
                     <p>Have questions? We're here to help with all your fencing needs.</p>
@@ -1346,7 +1382,7 @@
             <div class="page-header">
                 <div class="container">
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> > <a href="cart.html">Cart</a> > <span>Checkout</span>
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <a href="#" id="cart-page-link">Cart</a> > <span>Checkout</span>
                     </div>
                     <h1>Checkout</h1>
                 </div>
@@ -1424,6 +1460,206 @@
                 </div>
             </div>
         </div>
+
+        <!-- Other Pages (Installation, Resources, etc.) -->
+        <div id="installation-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <span>Installation Services</span>
+                    </div>
+                    <h1>Professional Fence Installation</h1>
+                    <p>Let our experts handle your fencing project from start to finish</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image" style="background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="about-text">
+                        <h2>Our Installation Process</h2>
+                        <p>We make fence installation easy and stress-free. Our professional installation team has years of experience with all types of fencing materials and can handle projects of any size.</p>
+                        
+                        <h3>Step 1: Consultation & Measurement</h3>
+                        <p>We'll visit your property to assess your needs, take precise measurements, and provide a detailed quote.</p>
+                        
+                        <h3>Step 2: Material Selection</h3>
+                        <p>Choose from our wide range of fencing materials and styles to match your property's aesthetic and functional requirements.</p>
+                        
+                        <h3>Step 3: Professional Installation</h3>
+                        <p>Our certified installers will complete your project efficiently and with minimal disruption to your property.</p>
+                        
+                        <h3>Step 4: Final Inspection</h3>
+                        <p>We conduct a thorough quality check to ensure your new fence meets our high standards and your expectations.</p>
+                        
+                        <a href="#" class="btn btn-primary" id="installation-contact-btn">Request a Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="resources-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <span>Resources</span>
+                    </div>
+                    <h1>Fencing Resources & Guides</h1>
+                    <p>Everything you need to know about choosing, installing, and maintaining your fence</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="categories">
+                    <div class="category-card">
+                        <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="category-content">
+                            <h3>Installation Guides</h3>
+                            <p>Step-by-step instructions for DIY fence installation</p>
+                            <a href="#" class="btn">View Guides</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="category-content">
+                            <h3>Maintenance Tips</h3>
+                            <p>How to keep your fence looking great for years</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="category-content">
+                            <h3>Product Comparisons</h3>
+                            <p>Compare different fencing materials and styles</p>
+                            <a href="#" class="btn">Compare Options</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bundles-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="#" class="nav-link" data-page="home">Home</a> > <span>Packages & Bundles</span>
+                    </div>
+                    <h1>Fencing Packages & Bundles</h1>
+                    <p>Complete fencing solutions at discounted package prices</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="section">
+                    <div class="bundle-card">
+                        <div class="bundle-header">
+                            <h3>Residential Chain Link Package - 100ft</h3>
+                        </div>
+                        <div class="bundle-content">
+                            <div class="bundle-products">
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>6ft Chain Link Fabric</h4>
+                                        <p>100 linear feet</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Line Posts</h4>
+                                        <p>13 units (8ft length)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Corner/End Posts</h4>
+                                        <p>4 units (8ft length)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Gate with Hardware</h4>
+                                        <p>1 unit (4ft width)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bundle-price">
+                                <div>
+                                    <span class="original-price">$2,850.00</span>
+                                    <span class="bundle-discount">15% OFF</span>
+                                </div>
+                                <div class="bundle-savings">Save $427.50</div>
+                            </div>
+                            
+                            <div class="product-price">$2,422.50</div>
+                            
+                            <button class="add-to-cart-large" data-id="bundle-1">Add Complete Package to Cart</button>
+                            
+                            <p><small>Includes all necessary hardware and tension bars. Professional installation available.</small></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="bundle-card">
+                        <div class="bundle-header">
+                            <h3>Vinyl Privacy Fence Package - 50ft</h3>
+                        </div>
+                        <div class="bundle-content">
+                            <div class="bundle-products">
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>6ft Privacy Panels</h4>
+                                        <p>50 linear feet</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Posts</h4>
+                                        <p>7 units (8ft length)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Gate Kit</h4>
+                                        <p>1 unit (3ft width)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bundle-price">
+                                <div>
+                                    <span class="original-price">$2,150.00</span>
+                                    <span class="bundle-discount">10% OFF</span>
+                                </div>
+                                <div class="bundle-savings">Save $215.00</div>
+                            </div>
+                            
+                            <div class="product-price">$1,935.00</div>
+                            
+                            <button class="add-to-cart-large" data-id="bundle-2">Add Complete Package to Cart</button>
+                            
+                            <p><small>Includes all necessary hardware and post caps. Professional installation available.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -1438,22 +1674,22 @@
                 <div class="footer-column">
                     <h3>Shop</h3>
                     <ul class="footer-links">
-                        <li><a href="category.html?cat=chain-link">Chain Link Fencing</a></li>
-                        <li><a href="category.html?cat=vinyl">Vinyl Fencing</a></li>
-                        <li><a href="category.html?cat=aluminum">Aluminum Fencing</a></li>
-                        <li><a href="category.html?cat=wood">Wood Fencing</a></li>
-                        <li><a href="category.html?cat=accessories">Fencing Accessories</a></li>
+                        <li><a href="#" class="category-link" data-category="chain-link">Chain Link Fencing</a></li>
+                        <li><a href="#" class="category-link" data-category="vinyl">Vinyl Fencing</a></li>
+                        <li><a href="#" class="category-link" data-category="aluminum">Aluminum Fencing</a></li>
+                        <li><a href="#" class="category-link" data-category="wood">Wood Fencing</a></li>
+                        <li><a href="#" class="category-link" data-category="accessories">Fencing Accessories</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Customer Service</h3>
                     <ul class="footer-links">
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="shipping.html">Shipping Information</a></li>
-                        <li><a href="returns.html">Returns & Exchanges</a></li>
-                        <li><a href="warranty.html">Warranty Information</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+                        <li><a href="#">Shipping Information</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Warranty Information</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
                 </div>
                 
@@ -1479,7 +1715,7 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="cart-items">
+                <div class="cart-items" id="cart-items-container">
                     <!-- Cart items will be dynamically added here -->
                 </div>
                 <div class="cart-total">
@@ -1501,10 +1737,8 @@
                 <div class="product-detail">
                     <div class="product-gallery">
                         <div class="main-image" id="main-product-image"></div>
-                        <div class="thumbnail-gallery">
-                            <div class="thumbnail active" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                            <div class="thumbnail" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-                            <div class="thumbnail" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        <div class="thumbnail-gallery" id="thumbnail-gallery">
+                            <!-- Thumbnails will be dynamically added -->
                         </div>
                     </div>
                     <div class="product-info">
@@ -1562,56 +1796,114 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message">Product added to cart!</span>
+    </div>
+
     <script>
         // Product Data
         const products = {
             1: {
                 title: "6ft Black Vinyl-Coated Chain Link Fence",
                 price: 18.50,
-                category: "Chain Link",
+                category: "chain-link",
                 description: "Our premium 6ft black vinyl-coated chain link fence offers durability and aesthetic appeal. The vinyl coating provides extra protection against rust and corrosion, making it perfect for residential and commercial applications.",
-                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                height: "6",
+                coating: "vinyl",
+                color: "black"
             },
             2: {
                 title: "Privacy Picket Vinyl Fence - 6ft Height",
                 price: 32.75,
-                category: "Vinyl",
+                category: "vinyl",
                 description: "This elegant privacy picket vinyl fence provides both security and aesthetic appeal for your property. Made from high-quality, UV-resistant vinyl that won't fade, crack, or warp over time.",
-                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                height: "6",
+                coating: "vinyl",
+                color: "white"
             },
             3: {
                 title: "Ornamental Aluminum Fence - Black",
                 price: 45.20,
-                category: "Aluminum",
+                category: "aluminum",
                 description: "Our ornamental aluminum fence combines strength with elegant design. The powder-coated black finish provides exceptional durability and requires minimal maintenance.",
-                image: "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                image: "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                height: "4",
+                coating: "powder",
+                color: "black"
             },
             4: {
                 title: "Heavy Duty Gate with Latch - 4ft Width",
                 price: 189.99,
-                category: "Accessories",
+                category: "accessories",
                 description: "This heavy-duty gate is constructed from galvanized steel with a weather-resistant finish. Includes a secure latch mechanism and all necessary hardware for installation.",
-                image: "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                image: "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ]
             },
             5: {
                 title: "4ft Galvanized Chain Link Fence",
                 price: 15.75,
-                category: "Chain Link",
+                category: "chain-link",
                 description: "Economical 4ft galvanized chain link fence perfect for basic boundary needs. The galvanized coating provides rust resistance for long-lasting performance.",
-                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                height: "4",
+                coating: "galvanized",
+                color: "silver"
             },
             6: {
                 title: "Semi-Privacy Vinyl Fence - 5ft Height",
                 price: 28.90,
-                category: "Vinyl",
+                category: "vinyl",
                 description: "This semi-privacy vinyl fence offers a balance between visibility and privacy. The unique design allows airflow while maintaining a clean, modern look.",
-                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                images: [
+                    "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                ],
+                height: "5",
+                coating: "vinyl",
+                color: "white"
             },
             "bundle-1": {
                 title: "Residential Chain Link Package - 100ft",
                 price: 2422.50,
-                category: "Bundle",
-                description: "Complete chain link fencing package for a 100ft residential installation. Includes all necessary components: chain link fabric, line posts, corner/end posts, gate with hardware, and all installation accessories."
+                category: "bundle",
+                description: "Complete chain link fencing package for a 100ft residential installation. Includes all necessary components: chain link fabric, line posts, corner/end posts, gate with hardware, and all installation accessories.",
+                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            "bundle-2": {
+                title: "Vinyl Privacy Fence Package - 50ft",
+                price: 1935.00,
+                category: "bundle",
+                description: "Complete vinyl privacy fencing package for a 50ft residential installation. Includes all necessary components: privacy panels, posts, gate kit, and installation hardware.",
+                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
             }
         };
 
@@ -1636,6 +1928,11 @@
                 name: "Fencing Accessories",
                 description: "All the hardware and components needed to complete your fencing project.",
                 products: [4]
+            },
+            "wood": {
+                name: "Wood Fencing",
+                description: "Classic and natural wood fencing options for a traditional look.",
+                products: []
             }
         };
 
@@ -1645,7 +1942,7 @@
         const cartModal = document.getElementById('cart-modal');
         const productModal = document.getElementById('product-modal');
         const closeModalButtons = document.querySelectorAll('.close-modal');
-        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartItemsContainer = document.getElementById('cart-items-container');
         const cartTotalAmount = document.getElementById('cart-total-amount');
         const cartIcon = document.querySelector('.cart-icon');
         const mainContent = document.getElementById('main-content');
@@ -1654,14 +1951,27 @@
         const aboutPage = document.getElementById('about-page');
         const contactPage = document.getElementById('contact-page');
         const checkoutPage = document.getElementById('checkout-page');
+        const installationPage = document.getElementById('installation-page');
+        const resourcesPage = document.getElementById('resources-page');
+        const bundlesPage = document.getElementById('bundles-page');
+        const toast = document.getElementById('toast');
+
+        // Current state
+        let currentPage = 'home';
+        let currentCategory = 'chain-link';
+        let currentFilters = {
+            height: 'all',
+            coating: 'all',
+            color: 'all'
+        };
 
         // Initialize the application
         function init() {
             // Set up event listeners for navigation
             setupNavigation();
             
-            // Check if we need to show a specific page based on URL
-            checkUrl();
+            // Load featured products on home page
+            loadFeaturedProducts();
             
             // Initialize cart
             updateCartDisplay();
@@ -1670,48 +1980,55 @@
         // Set up navigation event listeners
         function setupNavigation() {
             // Navigation links
-            document.querySelectorAll('nav a').forEach(link => {
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const href = this.getAttribute('href');
-                    
-                    if (href === 'index.html') {
-                        showHomePage();
-                    } else if (href === 'categories.html') {
-                        // For demo purposes, show chain link category
-                        showCategoryPage('chain-link');
-                    } else if (href === 'about.html') {
-                        showAboutPage();
-                    } else if (href === 'contact.html') {
-                        showContactPage();
-                    } else if (href.includes('category.html')) {
-                        const category = getParameterByName('cat', href);
-                        if (category) {
-                            showCategoryPage(category);
-                        }
-                    }
+                    const page = this.getAttribute('data-page');
+                    showPage(page);
                 });
             });
 
-            // Add to cart buttons
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = this.getAttribute('data-id');
+            // Category links
+            document.querySelectorAll('.category-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.getAttribute('data-category');
+                    showCategoryPage(category);
+                });
+            });
+
+            // Category cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    showCategoryPage(category);
+                });
+            });
+
+            // Add to cart buttons (will be reattached when products are loaded)
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const productId = e.target.getAttribute('data-id');
                     addToCart(productId);
-                });
+                    showToast('Product added to cart!');
+                }
             });
             
-            // View details buttons
-            document.querySelectorAll('.view-details').forEach(button => {
+            // View details buttons (will be reattached when products are loaded)
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('view-details')) {
+                    const productId = e.target.getAttribute('data-id');
+                    showProductDetails(productId);
+                }
+            });
+            
+            // Bundle add to cart buttons
+            document.querySelectorAll('.add-to-cart-large').forEach(button => {
                 button.addEventListener('click', function() {
                     const productId = this.getAttribute('data-id');
-                    showProductDetails(productId);
+                    addToCart(productId, 1);
+                    showToast('Package added to cart!');
                 });
-            });
-            
-            // Bundle add to cart
-            document.querySelector('.add-to-cart-large[data-id="bundle-1"]').addEventListener('click', function() {
-                addToCart('bundle-1', 1);
             });
             
             // Product detail add to cart
@@ -1720,6 +2037,7 @@
                 const quantity = parseInt(document.getElementById('quantity').value);
                 addToCart(productId, quantity);
                 productModal.style.display = 'none';
+                showToast('Product added to cart!');
             });
             
             // Cart icon click
@@ -1746,19 +2064,19 @@
             });
             
             // Thumbnail click
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.addEventListener('click', function() {
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('thumbnail')) {
                     document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    document.getElementById('main-product-image').style.backgroundImage = this.style.backgroundImage;
-                });
+                    e.target.classList.add('active');
+                    document.getElementById('main-product-image').style.backgroundImage = e.target.style.backgroundImage;
+                }
             });
             
             // Search functionality
             document.querySelector('.search-bar button').addEventListener('click', function() {
                 const searchTerm = document.querySelector('.search-bar input').value;
                 if (searchTerm.trim() !== '') {
-                    alert(`Searching for: ${searchTerm}`);
+                    showToast(`Searching for: ${searchTerm}`);
                     // In a real implementation, this would filter products
                 }
             });
@@ -1767,177 +2085,267 @@
             document.getElementById('go-to-checkout').addEventListener('click', function() {
                 if (cart.length > 0) {
                     cartModal.style.display = 'none';
-                    showCheckoutPage();
+                    showPage('checkout');
                 } else {
-                    alert('Your cart is empty. Add some products first!');
+                    showToast('Your cart is empty. Add some products first!', 'warning');
                 }
             });
             
             // Place order button
             document.getElementById('place-order-btn').addEventListener('click', function() {
                 if (cart.length > 0) {
-                    alert('Thank you for your order! In a real implementation, this would process the payment and create an order.');
+                    // Validate form
+                    const fullName = document.getElementById('full-name').value;
+                    const address = document.getElementById('address').value;
+                    const city = document.getElementById('city').value;
+                    const state = document.getElementById('state').value;
+                    const zip = document.getElementById('zip').value;
+                    const cardNumber = document.getElementById('card-number').value;
+                    const expiry = document.getElementById('expiry').value;
+                    const cvv = document.getElementById('cvv').value;
+                    
+                    if (!fullName || !address || !city || !state || !zip || !cardNumber || !expiry || !cvv) {
+                        showToast('Please fill out all required fields', 'warning');
+                        return;
+                    }
+                    
+                    showToast('Thank you for your order! Your order has been placed successfully.', 'success');
                     cart = [];
                     updateCartDisplay();
-                    showHomePage();
+                    showPage('home');
                 } else {
-                    alert('Your cart is empty. Add some products first!');
+                    showToast('Your cart is empty. Add some products first!', 'warning');
                 }
             });
             
             // Contact form submission
             document.getElementById('contact-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                alert('Thank you for your message! We will get back to you soon.');
+                showToast('Thank you for your message! We will get back to you soon.', 'success');
                 this.reset();
             });
             
             // Filter options
             document.querySelectorAll('.filter-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    // For demo purposes, just toggle active class
-                    if (!this.classList.contains('active')) {
-                        this.parentElement.querySelector('.filter-option.active').classList.remove('active');
-                        this.classList.add('active');
-                    }
+                    const filterType = this.getAttribute('data-filter');
+                    const filterValue = this.getAttribute('data-value');
+                    
+                    // Update active state
+                    this.parentElement.querySelectorAll('.filter-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Update filters
+                    currentFilters[filterType] = filterValue;
+                    
+                    // Reload products with filters
+                    loadCategoryProducts(currentCategory);
                 });
+            });
+            
+            // Account links
+            document.getElementById('account-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('Account page would open here', 'info');
+            });
+            
+            document.getElementById('tracking-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('Order tracking page would open here', 'info');
+            });
+            
+            document.getElementById('account-action').addEventListener('click', function() {
+                showToast('Account page would open here', 'info');
+            });
+            
+            // Hero shop button
+            document.getElementById('hero-shop-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('bundles');
+            });
+            
+            // Installation contact button
+            document.getElementById('installation-contact-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('contact');
+            });
+            
+            // Cart page link
+            document.getElementById('cart-page-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                cartModal.style.display = 'flex';
             });
         }
 
-        // Check URL parameters to determine which page to show
-        function checkUrl() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const page = urlParams.get('page');
-            const category = urlParams.get('cat');
-            
-            if (page === 'about') {
-                showAboutPage();
-            } else if (page === 'contact') {
-                showContactPage();
-            } else if (page === 'checkout') {
-                showCheckoutPage();
-            } else if (category) {
-                showCategoryPage(category);
-            } else {
-                showHomePage();
-            }
-        }
-
-        // Show home page
-        function showHomePage() {
-            hideAllPages();
-            homePage.style.display = 'block';
-            document.title = "SecureFence Pro | Premium Fencing Solutions";
-            window.history.pushState({}, '', 'index.html');
-        }
-
-        // Show category page
-        function showCategoryPage(categoryId) {
-            hideAllPages();
-            categoryPage.style.display = 'block';
-            
-            const category = categories[categoryId];
-            if (category) {
-                document.getElementById('category-name').textContent = category.name;
-                document.getElementById('category-title').textContent = category.name;
-                document.title = `${category.name} | SecureFence Pro`;
-                
-                // Update products for this category
-                const productsContainer = categoryPage.querySelector('.products');
-                productsContainer.innerHTML = '';
-                
-                category.products.forEach(productId => {
-                    const product = products[productId];
-                    if (product) {
-                        const productCard = document.createElement('div');
-                        productCard.className = 'product-card';
-                        productCard.innerHTML = `
-                            <div class="product-img" style="background-image: url('${product.image}');"></div>
-                            <div class="product-content">
-                                <div class="product-category">${product.category}</div>
-                                <h3 class="product-title">${product.title}</h3>
-                                <div class="product-price">$${product.price.toFixed(2)} ${product.category === 'Bundle' ? '' : '/ linear ft'}</div>
-                                <div class="product-actions">
-                                    <button class="add-to-cart" data-id="${productId}">Add to Cart</button>
-                                    <button class="view-details" data-id="${productId}">Details</button>
-                                </div>
-                            </div>
-                        `;
-                        productsContainer.appendChild(productCard);
-                    }
-                });
-                
-                // Re-attach event listeners to new buttons
-                productsContainer.querySelectorAll('.add-to-cart').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const productId = this.getAttribute('data-id');
-                        addToCart(productId);
-                    });
-                });
-                
-                productsContainer.querySelectorAll('.view-details').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const productId = this.getAttribute('data-id');
-                        showProductDetails(productId);
-                    });
-                });
-            }
-            
-            window.history.pushState({}, '', `category.html?cat=${categoryId}`);
-        }
-
-        // Show about page
-        function showAboutPage() {
-            hideAllPages();
-            aboutPage.style.display = 'block';
-            document.title = "About Us | SecureFence Pro";
-            window.history.pushState({}, '', 'about.html');
-        }
-
-        // Show contact page
-        function showContactPage() {
-            hideAllPages();
-            contactPage.style.display = 'block';
-            document.title = "Contact Us | SecureFence Pro";
-            window.history.pushState({}, '', 'contact.html');
-        }
-
-        // Show checkout page
-        function showCheckoutPage() {
-            hideAllPages();
-            checkoutPage.style.display = 'block';
-            document.title = "Checkout | SecureFence Pro";
-            
-            // Update checkout items
-            const checkoutItems = document.getElementById('checkout-items');
-            checkoutItems.innerHTML = '';
-            
-            let total = 0;
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                
-                const itemElement = document.createElement('div');
-                itemElement.className = 'order-summary-item';
-                itemElement.innerHTML = `
-                    <span>${item.title} x${item.quantity}</span>
-                    <span>$${itemTotal.toFixed(2)}</span>
-                `;
-                checkoutItems.appendChild(itemElement);
-            });
-            
-            document.getElementById('checkout-total').textContent = `$${total.toFixed(2)}`;
-            
-            window.history.pushState({}, '', 'checkout.html');
-        }
-
-        // Hide all pages
-        function hideAllPages() {
+        // Show page
+        function showPage(page) {
+            // Hide all pages
             homePage.style.display = 'none';
             categoryPage.style.display = 'none';
             aboutPage.style.display = 'none';
             contactPage.style.display = 'none';
             checkoutPage.style.display = 'none';
+            installationPage.style.display = 'none';
+            resourcesPage.style.display = 'none';
+            bundlesPage.style.display = 'none';
+            
+            // Show selected page
+            switch(page) {
+                case 'home':
+                    homePage.style.display = 'block';
+                    document.title = "SecureFence Pro | Premium Fencing Solutions";
+                    break;
+                case 'categories':
+                    // Default to chain link category
+                    showCategoryPage('chain-link');
+                    return;
+                case 'about':
+                    aboutPage.style.display = 'block';
+                    document.title = "About Us | SecureFence Pro";
+                    break;
+                case 'contact':
+                    contactPage.style.display = 'block';
+                    document.title = "Contact Us | SecureFence Pro";
+                    break;
+                case 'checkout':
+                    checkoutPage.style.display = 'block';
+                    document.title = "Checkout | SecureFence Pro";
+                    updateCheckoutPage();
+                    break;
+                case 'installation':
+                    installationPage.style.display = 'block';
+                    document.title = "Installation Services | SecureFence Pro";
+                    break;
+                case 'resources':
+                    resourcesPage.style.display = 'block';
+                    document.title = "Resources | SecureFence Pro";
+                    break;
+                case 'bundles':
+                    bundlesPage.style.display = 'block';
+                    document.title = "Packages & Bundles | SecureFence Pro";
+                    break;
+            }
+            
+            currentPage = page;
+        }
+
+        // Show category page
+        function showCategoryPage(categoryId) {
+            // Update current category
+            currentCategory = categoryId;
+            
+            // Show category page
+            showPage('categories');
+            
+            // Update category info
+            const category = categories[categoryId];
+            if (category) {
+                document.getElementById('category-name').textContent = category.name;
+                document.getElementById('category-title').textContent = category.name;
+                document.getElementById('category-description').textContent = category.description;
+                document.title = `${category.name} | SecureFence Pro`;
+                
+                // Load products for this category
+                loadCategoryProducts(categoryId);
+            }
+        }
+
+        // Load featured products on home page
+        function loadFeaturedProducts() {
+            const productsContainer = homePage.querySelector('.products');
+            productsContainer.innerHTML = '';
+            
+            // Show first 4 products as featured
+            const featuredProductIds = [1, 2, 3, 4];
+            
+            featuredProductIds.forEach(productId => {
+                const product = products[productId];
+                if (product) {
+                    const productCard = createProductCard(product, productId);
+                    productsContainer.appendChild(productCard);
+                }
+            });
+        }
+
+        // Load products for a category
+        function loadCategoryProducts(categoryId) {
+            const productsContainer = document.getElementById('category-products');
+            productsContainer.innerHTML = '';
+            
+            const category = categories[categoryId];
+            if (category && category.products.length > 0) {
+                // Filter products based on current filters
+                const filteredProducts = category.products.filter(productId => {
+                    const product = products[productId];
+                    
+                    // Check height filter
+                    if (currentFilters.height !== 'all' && product.height !== currentFilters.height) {
+                        return false;
+                    }
+                    
+                    // Check coating filter
+                    if (currentFilters.coating !== 'all' && product.coating !== currentFilters.coating) {
+                        return false;
+                    }
+                    
+                    // Check color filter
+                    if (currentFilters.color !== 'all' && product.color !== currentFilters.color) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+                
+                if (filteredProducts.length === 0) {
+                    // Show empty state
+                    productsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-search"></i>
+                            <h3>No products found</h3>
+                            <p>Try adjusting your filters to see more products.</p>
+                        </div>
+                    `;
+                } else {
+                    // Show filtered products
+                    filteredProducts.forEach(productId => {
+                        const product = products[productId];
+                        if (product) {
+                            const productCard = createProductCard(product, productId);
+                            productsContainer.appendChild(productCard);
+                        }
+                    });
+                }
+            } else {
+                // Show empty state for category with no products
+                productsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-box-open"></i>
+                        <h3>No products available</h3>
+                        <p>Check back soon for new products in this category.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Create product card HTML
+        function createProductCard(product, productId) {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            productCard.innerHTML = `
+                <div class="product-img" style="background-image: url('${product.image}');"></div>
+                <div class="product-content">
+                    <div class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</div>
+                    <h3 class="product-title">${product.title}</h3>
+                    <div class="product-price">$${product.price.toFixed(2)} ${product.category === 'bundle' ? '' : '/ linear ft'}</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="${productId}">Add to Cart</button>
+                        <button class="view-details" data-id="${productId}">Details</button>
+                    </div>
+                </div>
+            `;
+            return productCard;
         }
 
         // Update cart count
@@ -1951,55 +2359,65 @@
             cartItemsContainer.innerHTML = '';
             let total = 0;
             
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-                
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <div class="cart-item-img" style="background-image: url('${item.image}')"></div>
-                    <div class="cart-item-details">
-                        <div class="cart-item-title">${item.title}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
-                    </div>
-                    <div class="cart-item-actions">
-                        <div class="quantity-control">
-                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
-                            <span class="quantity">${item.quantity}</span>
-                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
-                        </div>
-                        <button class="remove-item" data-id="${item.id}">🗑️</button>
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add some products to get started!</p>
                     </div>
                 `;
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div class="cart-item-img" style="background-image: url('${item.image}')"></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                    
+                    cartItemsContainer.appendChild(cartItem);
+                });
                 
-                cartItemsContainer.appendChild(cartItem);
-            });
+                // Add event listeners to quantity buttons
+                cartItemsContainer.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        decreaseQuantity(id);
+                    });
+                });
+                
+                cartItemsContainer.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        increaseQuantity(id);
+                    });
+                });
+                
+                cartItemsContainer.querySelectorAll('.remove-item').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        removeFromCart(id);
+                    });
+                });
+            }
             
             cartTotalAmount.textContent = total.toFixed(2);
             updateCartCount();
-            
-            // Add event listeners to quantity buttons
-            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    decreaseQuantity(id);
-                });
-            });
-            
-            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    increaseQuantity(id);
-                });
-            });
-            
-            document.querySelectorAll('.remove-item').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.getAttribute('data-id');
-                    removeFromCart(id);
-                });
-            });
         }
 
         // Add to cart
@@ -2022,17 +2440,13 @@
             }
             
             updateCartDisplay();
-            
-            // Show cart modal when adding an item
-            if (productId !== 'bundle-1') {
-                cartModal.style.display = 'flex';
-            }
         }
 
         // Remove from cart
         function removeFromCart(productId) {
             cart = cart.filter(item => item.id !== productId);
             updateCartDisplay();
+            showToast('Product removed from cart');
         }
 
         // Increase quantity
@@ -2064,7 +2478,20 @@
             document.getElementById('product-detail-title').textContent = product.title;
             document.getElementById('product-detail-price').textContent = `$${product.price.toFixed(2)}`;
             document.getElementById('product-detail-description').textContent = product.description;
-            document.getElementById('main-product-image').style.backgroundImage = `url('${product.image}')`;
+            
+            // Update main image
+            document.getElementById('main-product-image').style.backgroundImage = `url('${product.images[0]}')`;
+            
+            // Update thumbnails
+            const thumbnailGallery = document.getElementById('thumbnail-gallery');
+            thumbnailGallery.innerHTML = '';
+            
+            product.images.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.style.backgroundImage = `url('${image}')`;
+                thumbnailGallery.appendChild(thumbnail);
+            });
             
             // Update add to cart button
             const addToCartBtn = document.getElementById('add-to-cart-detail');
@@ -2073,15 +2500,52 @@
             productModal.style.display = 'flex';
         }
 
-        // Helper function to get URL parameters
-        function getParameterByName(name, url) {
-            if (!url) url = window.location.href;
-            name = name.replace(/[\[\]]/g, '\\$&');
-            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-            const results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        // Update checkout page
+        function updateCheckoutPage() {
+            // Update checkout items
+            const checkoutItems = document.getElementById('checkout-items');
+            checkoutItems.innerHTML = '';
+            
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'order-summary-item';
+                itemElement.innerHTML = `
+                    <span>${item.title} x${item.quantity}</span>
+                    <span>$${itemTotal.toFixed(2)}</span>
+                `;
+                checkoutItems.appendChild(itemElement);
+            });
+            
+            document.getElementById('checkout-total').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            
+            // Set color based on type
+            if (type === 'success') {
+                toast.style.background = 'var(--success)';
+            } else if (type === 'warning') {
+                toast.style.background = 'var(--warning)';
+                toast.style.color = 'var(--dark)';
+            } else if (type === 'info') {
+                toast.style.background = 'var(--primary)';
+            }
+            
+            toast.style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
         }
 
         // Initialize the application when DOM is loaded
