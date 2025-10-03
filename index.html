@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureFence Pro | Premium Fencing Solutions</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2c5530;
+            --secondary: #4a7c59;
+            --accent: #8fb996;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border: #dee2e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .main-header {
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-action {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .header-action i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .cart-count {
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: white;
+            padding: 15px 20px;
+            display: block;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: var(--primary);
+        }
+        
+        .dropdown {
+            position: absolute;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 200px;
+            display: none;
+            z-index: 10;
+        }
+        
+        .dropdown a {
+            color: var(--dark);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .dropdown a:hover {
+            background: var(--light);
+        }
+        
+        .nav-links li:hover .dropdown {
+            display: block;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #7aa882;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1e3a21;
+        }
+        
+        /* Categories Section */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .category-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Products Section */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-content {
+            padding: 20px;
+        }
+        
+        .product-category {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            height: 45px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .add-to-cart {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            flex: 1;
+            margin-right: 10px;
+        }
+        
+        .view-details {
+            background: var(--light);
+            color: var(--dark);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        /* Bundle Section */
+        .bundle-section {
+            background: var(--light);
+        }
+        
+        .bundle-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .bundle-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .bundle-content {
+            padding: 20px;
+        }
+        
+        .bundle-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .bundle-product {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .bundle-product-img {
+            width: 60px;
+            height: 60px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        
+        .bundle-product-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .bundle-product-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .bundle-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: var(--gray);
+        }
+        
+        .bundle-discount {
+            background: #ff6b6b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .bundle-savings {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        /* Cart */
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .quantity {
+            margin: 0 10px;
+        }
+        
+        .remove-item {
+            color: #dc3545;
+            background: none;
+            font-size: 1.2rem;
+        }
+        
+        .cart-total {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        /* Product Detail */
+        .product-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .thumbnail-gallery {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .thumbnail.active {
+            border-color: var(--primary);
+        }
+        
+        .product-info h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .product-price-large {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .product-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .product-options {
+            margin-bottom: 20px;
+        }
+        
+        .option-group {
+            margin-bottom: 15px;
+        }
+        
+        .option-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .option-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .add-to-cart-large {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Page Content */
+        .page-content {
+            min-height: 60vh;
+            padding: 40px 0;
+        }
+        
+        .page-header {
+            background: var(--light);
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .breadcrumb {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+        }
+        
+        /* Category Page */
+        .category-filters {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-option {
+            padding: 5px 10px;
+            background: var(--light);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .filter-option.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .about-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .about-text h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 15px;
+        }
+        
+        /* Checkout Page */
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .checkout-section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .checkout-section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 15px 0;
+            border-top: 2px solid var(--border);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .search-bar {
+                margin: 15px 0;
+                max-width: 100%;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links li {
+                flex: 1 0 50%;
+            }
+            
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <span>📞 1-800-FENCE-PRO</span>
+                    <span>✉️ support@securefencepro.com</span>
+                </div>
+                <div class="account-links">
+                    <a href="account.html">My Account</a> | 
+                    <a href="tracking.html">Order Tracking</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">SecureFence<span>Pro</span></div>
+                    
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search for fencing products...">
+                        <button>Search</button>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <div class="header-action">
+                            <i>👤</i>
+                            <span>Account</span>
+                        </div>
+                        <div class="header-action">
+                            <div class="cart-icon">
+                                <i>🛒</i>
+                                <span class="cart-count">0</span>
+                            </div>
+                            <span>Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="categories.html">Products ▾</a>
+                        <div class="dropdown">
+                            <a href="category.html?cat=chain-link">Chain Link Fencing</a>
+                            <a href="category.html?cat=vinyl">Vinyl Fencing</a>
+                            <a href="category.html?cat=aluminum">Aluminum Fencing</a>
+                            <a href="category.html?cat=wood">Wood Fencing</a>
+                            <a href="category.html?cat=accessories">Fencing Accessories</a>
+                        </div>
+                    </li>
+                    <li><a href="bundles.html">Packages & Bundles</a></li>
+                    <li><a href="installation.html">Installation Services</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Page Content -->
+        <div id="home-page" class="page-content">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <h1>Premium Fencing Solutions for Every Property</h1>
+                    <p>High-quality chain link, vinyl, and aluminum fencing with professional installation services. Create the perfect boundary for your home or business.</p>
+                    <a href="bundles.html" class="btn btn-primary">Shop Fencing Packages</a>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Our Fencing Categories</h2>
+                        <p>Choose the perfect fencing solution for your needs</p>
+                    </div>
+                    
+                    <div class="categories">
+                        <div class="category-card">
+                            <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="category-content">
+                                <h3>Chain Link Packages</h3>
+                                <p>Durable and affordable fencing solutions</p>
+                                <a href="category.html?cat=chain-link" class="btn">Shop Now</a>
+                            </div>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="category-content">
+                                <h3>Vinyl Fencing</h3>
+                                <p>Low-maintenance and elegant designs</p>
+                                <a href="category.html?cat=vinyl" class="btn">Shop Now</a>
+                            </div>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="category-content">
+                                <h3>Aluminum Fencing</h3>
+                                <p>Strong, rust-resistant and decorative options</p>
+                                <a href="category.html?cat=aluminum" class="btn">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Featured Products</h2>
+                        <p>Our most popular fencing solutions</p>
+                    </div>
+                    
+                    <div class="products">
+                        <div class="product-card">
+                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="product-content">
+                                <div class="product-category">Chain Link</div>
+                                <h3 class="product-title">6ft Black Vinyl-Coated Chain Link Fence</h3>
+                                <div class="product-price">$18.50 / linear ft</div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart" data-id="1">Add to Cart</button>
+                                    <button class="view-details" data-id="1">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="product-content">
+                                <div class="product-category">Vinyl</div>
+                                <h3 class="product-title">Privacy Picket Vinyl Fence - 6ft Height</h3>
+                                <div class="product-price">$32.75 / linear ft</div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart" data-id="2">Add to Cart</button>
+                                    <button class="view-details" data-id="2">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="product-content">
+                                <div class="product-category">Aluminum</div>
+                                <h3 class="product-title">Ornamental Aluminum Fence - Black</h3>
+                                <div class="product-price">$45.20 / linear ft</div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart" data-id="3">Add to Cart</button>
+                                    <button class="view-details" data-id="3">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="product-content">
+                                <div class="product-category">Accessories</div>
+                                <h3 class="product-title">Heavy Duty Gate with Latch - 4ft Width</h3>
+                                <div class="product-price">$189.99</div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart" data-id="4">Add to Cart</button>
+                                    <button class="view-details" data-id="4">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bundle Section -->
+            <section class="section bundle-section">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Complete Fencing Packages</h2>
+                        <p>Save time and money with our pre-configured bundles</p>
+                    </div>
+                    
+                    <div class="bundle-card">
+                        <div class="bundle-header">
+                            <h3>Residential Chain Link Package - 100ft</h3>
+                        </div>
+                        <div class="bundle-content">
+                            <div class="bundle-products">
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>6ft Chain Link Fabric</h4>
+                                        <p>100 linear feet</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Line Posts</h4>
+                                        <p>13 units (8ft length)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Corner/End Posts</h4>
+                                        <p>4 units (8ft length)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bundle-product">
+                                    <div class="bundle-product-img" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                                    <div class="bundle-product-info">
+                                        <h4>Gate with Hardware</h4>
+                                        <p>1 unit (4ft width)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bundle-price">
+                                <div>
+                                    <span class="original-price">$2,850.00</span>
+                                    <span class="bundle-discount">15% OFF</span>
+                                </div>
+                                <div class="bundle-savings">Save $427.50</div>
+                            </div>
+                            
+                            <div class="product-price">$2,422.50</div>
+                            
+                            <button class="add-to-cart-large" data-id="bundle-1">Add Complete Package to Cart</button>
+                            
+                            <p><small>Includes all necessary hardware and tension bars. Professional installation available.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Category Page Content -->
+        <div id="category-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> > <a href="categories.html">Products</a> > <span id="category-name">Chain Link Fencing</span>
+                    </div>
+                    <h1 id="category-title">Chain Link Fencing</h1>
+                    <p>Durable, affordable, and versatile fencing solutions for residential and commercial properties.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="category-filters">
+                    <div class="filter-group">
+                        <h3>Height</h3>
+                        <div class="filter-options">
+                            <div class="filter-option active">All</div>
+                            <div class="filter-option">4 ft</div>
+                            <div class="filter-option">5 ft</div>
+                            <div class="filter-option">6 ft</div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Coating</h3>
+                        <div class="filter-options">
+                            <div class="filter-option active">All</div>
+                            <div class="filter-option">Vinyl Coated</div>
+                            <div class="filter-option">Galvanized</div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Color</h3>
+                        <div class="filter-options">
+                            <div class="filter-option active">All</div>
+                            <div class="filter-option">Black</div>
+                            <div class="filter-option">Green</div>
+                            <div class="filter-option">Silver</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="products">
+                    <!-- Products will be dynamically loaded based on category -->
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page Content -->
+        <div id="about-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> > <span>About Us</span>
+                    </div>
+                    <h1>About SecureFence Pro</h1>
+                    <p>Your trusted partner in premium fencing solutions since 2005</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2005, SecureFence Pro began as a small family-owned business with a simple mission: to provide high-quality fencing materials at affordable prices. What started as a local supplier has grown into a trusted national provider of premium fencing solutions.</p>
+                        <p>We understand that a fence is more than just a boundary - it's a statement about your property, your security, and your style. That's why we're committed to offering the widest selection of fencing materials, from durable chain link to elegant vinyl and aluminum options.</p>
+                        <h2>Our Mission</h2>
+                        <p>To provide homeowners and businesses with premium fencing solutions that combine quality, durability, and aesthetic appeal, backed by exceptional customer service and expert guidance.</p>
+                        <h2>Why Choose Us?</h2>
+                        <p>With over 15 years of experience in the fencing industry, we've built relationships with leading manufacturers to bring you the best products at competitive prices. Our team of fencing experts is always available to help you select the perfect solution for your specific needs.</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <h2>Meet Our Team</h2>
+                    </div>
+                    
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="team-photo" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <h3>Michael Johnson</h3>
+                            <p>Founder & CEO</p>
+                        </div>
+                        
+                        <div class="team-member">
+                            <div class="team-photo" style="background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <h3>Sarah Williams</h3>
+                            <p>Head of Sales</p>
+                        </div>
+                        
+                        <div class="team-member">
+                            <div class="team-photo" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <h3>Robert Chen</h3>
+                            <p>Installation Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page Content -->
+        <div id="contact-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> > <span>Contact Us</span>
+                    </div>
+                    <h1>Contact SecureFence Pro</h1>
+                    <p>Have questions? We're here to help with all your fencing needs.</p>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="about-content">
+                    <div class="contact-form">
+                        <h2>Send Us a Message</h2>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" class="form-control">
+                                    <option>General Inquiry</option>
+                                    <option>Product Information</option>
+                                    <option>Installation Services</option>
+                                    <option>Order Support</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div>
+                        <h2>Contact Information</h2>
+                        <p><strong>Address:</strong><br>123 Fencing Way<br>Orlando, FL 32801</p>
+                        <p><strong>Phone:</strong><br>1-800-FENCE-PRO<br>(1-800-336-2377)</p>
+                        <p><strong>Email:</strong><br>support@securefencepro.com</p>
+                        <p><strong>Business Hours:</strong><br>Monday - Friday: 8am - 6pm EST<br>Saturday: 9am - 4pm EST<br>Sunday: Closed</p>
+                        
+                        <h2>Visit Our Showroom</h2>
+                        <p>Come see our fencing products in person at our Orlando showroom. Our experts will be happy to answer your questions and help you select the perfect fencing solution for your property.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Page Content -->
+        <div id="checkout-page" class="page-content" style="display: none;">
+            <div class="page-header">
+                <div class="container">
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> > <a href="cart.html">Cart</a> > <span>Checkout</span>
+                    </div>
+                    <h1>Checkout</h1>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="checkout-content">
+                    <div>
+                        <div class="checkout-section">
+                            <h2>Shipping Information</h2>
+                            <div class="form-group">
+                                <label for="full-name">Full Name</label>
+                                <input type="text" id="full-name" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" class="form-control" required>
+                                    <option value="">Select State</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="GA">Georgia</option>
+                                    <!-- More states would be added in a real implementation -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="zip">ZIP Code</label>
+                                <input type="text" id="zip" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="checkout-section">
+                            <h2>Payment Method</h2>
+                            <div class="form-group">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" class="form-control" placeholder="MM/YY" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" class="form-control" placeholder="123" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="checkout-section">
+                            <h2>Order Summary</h2>
+                            <div id="checkout-items">
+                                <!-- Checkout items will be dynamically added -->
+                            </div>
+                            <div class="order-total">
+                                <span>Total:</span>
+                                <span id="checkout-total">$0.00</span>
+                            </div>
+                            <button class="checkout-btn" id="place-order-btn">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SecureFence Pro</h3>
+                    <p>Your trusted partner for premium fencing solutions since 2005. We provide high-quality materials and professional installation services.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul class="footer-links">
+                        <li><a href="category.html?cat=chain-link">Chain Link Fencing</a></li>
+                        <li><a href="category.html?cat=vinyl">Vinyl Fencing</a></li>
+                        <li><a href="category.html?cat=aluminum">Aluminum Fencing</a></li>
+                        <li><a href="category.html?cat=wood">Wood Fencing</a></li>
+                        <li><a href="category.html?cat=accessories">Fencing Accessories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="shipping.html">Shipping Information</a></li>
+                        <li><a href="returns.html">Returns & Exchanges</a></li>
+                        <li><a href="warranty.html">Warranty Information</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p>123 Fencing Way<br>Orlando, FL 32801</p>
+                    <p>Phone: 1-800-FENCE-PRO<br>Email: support@securefencepro.com</p>
+                    <p>Business Hours:<br>Mon-Fri: 8am-6pm EST<br>Sat: 9am-4pm EST</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 SecureFence Pro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Shopping Cart</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="cart-total">
+                    Total: $<span id="cart-total-amount">0.00</span>
+                </div>
+                <button class="checkout-btn" id="go-to-checkout">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Product Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail">
+                    <div class="product-gallery">
+                        <div class="main-image" id="main-product-image"></div>
+                        <div class="thumbnail-gallery">
+                            <div class="thumbnail active" style="background-image: url('https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="thumbnail" style="background-image: url('https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                            <div class="thumbnail" style="background-image: url('https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h1 id="product-detail-title">Product Title</h1>
+                        <div class="product-price-large" id="product-detail-price">$0.00</div>
+                        <div class="product-description" id="product-detail-description">
+                            Product description will appear here.
+                        </div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <label for="color">Color</label>
+                                <select id="color" class="option-select">
+                                    <option>Black</option>
+                                    <option>Green</option>
+                                    <option>White</option>
+                                </select>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="height">Height</label>
+                                <select id="height" class="option-select">
+                                    <option>4 ft</option>
+                                    <option>5 ft</option>
+                                    <option>6 ft</option>
+                                </select>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="quantity">Quantity</label>
+                                <select id="quantity" class="option-select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="add-to-cart-large" id="add-to-cart-detail">Add to Cart</button>
+                        
+                        <div class="product-features">
+                            <h3>Features & Benefits</h3>
+                            <ul>
+                                <li>Durable construction for long-lasting performance</li>
+                                <li>Weather-resistant materials</li>
+                                <li>Easy installation with included hardware</li>
+                                <li>10-year manufacturer warranty</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Product Data
+        const products = {
+            1: {
+                title: "6ft Black Vinyl-Coated Chain Link Fence",
+                price: 18.50,
+                category: "Chain Link",
+                description: "Our premium 6ft black vinyl-coated chain link fence offers durability and aesthetic appeal. The vinyl coating provides extra protection against rust and corrosion, making it perfect for residential and commercial applications.",
+                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            2: {
+                title: "Privacy Picket Vinyl Fence - 6ft Height",
+                price: 32.75,
+                category: "Vinyl",
+                description: "This elegant privacy picket vinyl fence provides both security and aesthetic appeal for your property. Made from high-quality, UV-resistant vinyl that won't fade, crack, or warp over time.",
+                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            3: {
+                title: "Ornamental Aluminum Fence - Black",
+                price: 45.20,
+                category: "Aluminum",
+                description: "Our ornamental aluminum fence combines strength with elegant design. The powder-coated black finish provides exceptional durability and requires minimal maintenance.",
+                image: "https://images.unsplash.com/photo-1600585154340-6f2c0a6ee6f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            4: {
+                title: "Heavy Duty Gate with Latch - 4ft Width",
+                price: 189.99,
+                category: "Accessories",
+                description: "This heavy-duty gate is constructed from galvanized steel with a weather-resistant finish. Includes a secure latch mechanism and all necessary hardware for installation.",
+                image: "https://images.unsplash.com/photo-1573867635240-8c430686b3e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            5: {
+                title: "4ft Galvanized Chain Link Fence",
+                price: 15.75,
+                category: "Chain Link",
+                description: "Economical 4ft galvanized chain link fence perfect for basic boundary needs. The galvanized coating provides rust resistance for long-lasting performance.",
+                image: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            6: {
+                title: "Semi-Privacy Vinyl Fence - 5ft Height",
+                price: 28.90,
+                category: "Vinyl",
+                description: "This semi-privacy vinyl fence offers a balance between visibility and privacy. The unique design allows airflow while maintaining a clean, modern look.",
+                image: "https://images.unsplash.com/photo-1581833973753-015d5aa7f7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            "bundle-1": {
+                title: "Residential Chain Link Package - 100ft",
+                price: 2422.50,
+                category: "Bundle",
+                description: "Complete chain link fencing package for a 100ft residential installation. Includes all necessary components: chain link fabric, line posts, corner/end posts, gate with hardware, and all installation accessories."
+            }
+        };
+
+        // Category Data
+        const categories = {
+            "chain-link": {
+                name: "Chain Link Fencing",
+                description: "Durable, affordable, and versatile fencing solutions for residential and commercial properties.",
+                products: [1, 5]
+            },
+            "vinyl": {
+                name: "Vinyl Fencing",
+                description: "Low-maintenance and elegant fencing options that provide privacy and aesthetic appeal.",
+                products: [2, 6]
+            },
+            "aluminum": {
+                name: "Aluminum Fencing",
+                description: "Strong, rust-resistant decorative fencing that combines security with elegant design.",
+                products: [3]
+            },
+            "accessories": {
+                name: "Fencing Accessories",
+                description: "All the hardware and components needed to complete your fencing project.",
+                products: [4]
+            }
+        };
+
+        // Cart functionality
+        let cart = [];
+        const cartCount = document.querySelector('.cart-count');
+        const cartModal = document.getElementById('cart-modal');
+        const productModal = document.getElementById('product-modal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotalAmount = document.getElementById('cart-total-amount');
+        const cartIcon = document.querySelector('.cart-icon');
+        const mainContent = document.getElementById('main-content');
+        const homePage = document.getElementById('home-page');
+        const categoryPage = document.getElementById('category-page');
+        const aboutPage = document.getElementById('about-page');
+        const contactPage = document.getElementById('contact-page');
+        const checkoutPage = document.getElementById('checkout-page');
+
+        // Initialize the application
+        function init() {
+            // Set up event listeners for navigation
+            setupNavigation();
+            
+            // Check if we need to show a specific page based on URL
+            checkUrl();
+            
+            // Initialize cart
+            updateCartDisplay();
+        }
+
+        // Set up navigation event listeners
+        function setupNavigation() {
+            // Navigation links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    
+                    if (href === 'index.html') {
+                        showHomePage();
+                    } else if (href === 'categories.html') {
+                        // For demo purposes, show chain link category
+                        showCategoryPage('chain-link');
+                    } else if (href === 'about.html') {
+                        showAboutPage();
+                    } else if (href === 'contact.html') {
+                        showContactPage();
+                    } else if (href.includes('category.html')) {
+                        const category = getParameterByName('cat', href);
+                        if (category) {
+                            showCategoryPage(category);
+                        }
+                    }
+                });
+            });
+
+            // Add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    addToCart(productId);
+                });
+            });
+            
+            // View details buttons
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    showProductDetails(productId);
+                });
+            });
+            
+            // Bundle add to cart
+            document.querySelector('.add-to-cart-large[data-id="bundle-1"]').addEventListener('click', function() {
+                addToCart('bundle-1', 1);
+            });
+            
+            // Product detail add to cart
+            document.getElementById('add-to-cart-detail').addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                const quantity = parseInt(document.getElementById('quantity').value);
+                addToCart(productId, quantity);
+                productModal.style.display = 'none';
+            });
+            
+            // Cart icon click
+            cartIcon.addEventListener('click', function() {
+                cartModal.style.display = 'flex';
+            });
+            
+            // Close modal buttons
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    cartModal.style.display = 'none';
+                    productModal.style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+                if (event.target === productModal) {
+                    productModal.style.display = 'none';
+                }
+            });
+            
+            // Thumbnail click
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('main-product-image').style.backgroundImage = this.style.backgroundImage;
+                });
+            });
+            
+            // Search functionality
+            document.querySelector('.search-bar button').addEventListener('click', function() {
+                const searchTerm = document.querySelector('.search-bar input').value;
+                if (searchTerm.trim() !== '') {
+                    alert(`Searching for: ${searchTerm}`);
+                    // In a real implementation, this would filter products
+                }
+            });
+            
+            // Go to checkout button
+            document.getElementById('go-to-checkout').addEventListener('click', function() {
+                if (cart.length > 0) {
+                    cartModal.style.display = 'none';
+                    showCheckoutPage();
+                } else {
+                    alert('Your cart is empty. Add some products first!');
+                }
+            });
+            
+            // Place order button
+            document.getElementById('place-order-btn').addEventListener('click', function() {
+                if (cart.length > 0) {
+                    alert('Thank you for your order! In a real implementation, this would process the payment and create an order.');
+                    cart = [];
+                    updateCartDisplay();
+                    showHomePage();
+                } else {
+                    alert('Your cart is empty. Add some products first!');
+                }
+            });
+            
+            // Contact form submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+            
+            // Filter options
+            document.querySelectorAll('.filter-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // For demo purposes, just toggle active class
+                    if (!this.classList.contains('active')) {
+                        this.parentElement.querySelector('.filter-option.active').classList.remove('active');
+                        this.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Check URL parameters to determine which page to show
+        function checkUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page');
+            const category = urlParams.get('cat');
+            
+            if (page === 'about') {
+                showAboutPage();
+            } else if (page === 'contact') {
+                showContactPage();
+            } else if (page === 'checkout') {
+                showCheckoutPage();
+            } else if (category) {
+                showCategoryPage(category);
+            } else {
+                showHomePage();
+            }
+        }
+
+        // Show home page
+        function showHomePage() {
+            hideAllPages();
+            homePage.style.display = 'block';
+            document.title = "SecureFence Pro | Premium Fencing Solutions";
+            window.history.pushState({}, '', 'index.html');
+        }
+
+        // Show category page
+        function showCategoryPage(categoryId) {
+            hideAllPages();
+            categoryPage.style.display = 'block';
+            
+            const category = categories[categoryId];
+            if (category) {
+                document.getElementById('category-name').textContent = category.name;
+                document.getElementById('category-title').textContent = category.name;
+                document.title = `${category.name} | SecureFence Pro`;
+                
+                // Update products for this category
+                const productsContainer = categoryPage.querySelector('.products');
+                productsContainer.innerHTML = '';
+                
+                category.products.forEach(productId => {
+                    const product = products[productId];
+                    if (product) {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'product-card';
+                        productCard.innerHTML = `
+                            <div class="product-img" style="background-image: url('${product.image}');"></div>
+                            <div class="product-content">
+                                <div class="product-category">${product.category}</div>
+                                <h3 class="product-title">${product.title}</h3>
+                                <div class="product-price">$${product.price.toFixed(2)} ${product.category === 'Bundle' ? '' : '/ linear ft'}</div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart" data-id="${productId}">Add to Cart</button>
+                                    <button class="view-details" data-id="${productId}">Details</button>
+                                </div>
+                            </div>
+                        `;
+                        productsContainer.appendChild(productCard);
+                    }
+                });
+                
+                // Re-attach event listeners to new buttons
+                productsContainer.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = this.getAttribute('data-id');
+                        addToCart(productId);
+                    });
+                });
+                
+                productsContainer.querySelectorAll('.view-details').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = this.getAttribute('data-id');
+                        showProductDetails(productId);
+                    });
+                });
+            }
+            
+            window.history.pushState({}, '', `category.html?cat=${categoryId}`);
+        }
+
+        // Show about page
+        function showAboutPage() {
+            hideAllPages();
+            aboutPage.style.display = 'block';
+            document.title = "About Us | SecureFence Pro";
+            window.history.pushState({}, '', 'about.html');
+        }
+
+        // Show contact page
+        function showContactPage() {
+            hideAllPages();
+            contactPage.style.display = 'block';
+            document.title = "Contact Us | SecureFence Pro";
+            window.history.pushState({}, '', 'contact.html');
+        }
+
+        // Show checkout page
+        function showCheckoutPage() {
+            hideAllPages();
+            checkoutPage.style.display = 'block';
+            document.title = "Checkout | SecureFence Pro";
+            
+            // Update checkout items
+            const checkoutItems = document.getElementById('checkout-items');
+            checkoutItems.innerHTML = '';
+            
+            let total = 0;
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'order-summary-item';
+                itemElement.innerHTML = `
+                    <span>${item.title} x${item.quantity}</span>
+                    <span>$${itemTotal.toFixed(2)}</span>
+                `;
+                checkoutItems.appendChild(itemElement);
+            });
+            
+            document.getElementById('checkout-total').textContent = `$${total.toFixed(2)}`;
+            
+            window.history.pushState({}, '', 'checkout.html');
+        }
+
+        // Hide all pages
+        function hideAllPages() {
+            homePage.style.display = 'none';
+            categoryPage.style.display = 'none';
+            aboutPage.style.display = 'none';
+            contactPage.style.display = 'none';
+            checkoutPage.style.display = 'none';
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-img" style="background-image: url('${item.image}')"></div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        </div>
+                        <button class="remove-item" data-id="${item.id}">🗑️</button>
+                    </div>
+                `;
+                
+                cartItemsContainer.appendChild(cartItem);
+            });
+            
+            cartTotalAmount.textContent = total.toFixed(2);
+            updateCartCount();
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    decreaseQuantity(id);
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    increaseQuantity(id);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    removeFromCart(id);
+                });
+            });
+        }
+
+        // Add to cart
+        function addToCart(productId, quantity = 1) {
+            const product = products[productId];
+            
+            // Check if product is already in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: productId,
+                    title: product.title,
+                    price: product.price,
+                    image: product.image || "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    quantity: quantity
+                });
+            }
+            
+            updateCartDisplay();
+            
+            // Show cart modal when adding an item
+            if (productId !== 'bundle-1') {
+                cartModal.style.display = 'flex';
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+        }
+
+        // Increase quantity
+        function increaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+                updateCartDisplay();
+            }
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                } else {
+                    removeFromCart(productId);
+                }
+                updateCartDisplay();
+            }
+        }
+
+        // Show product details
+        function showProductDetails(productId) {
+            const product = products[productId];
+            
+            document.getElementById('product-detail-title').textContent = product.title;
+            document.getElementById('product-detail-price').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('product-detail-description').textContent = product.description;
+            document.getElementById('main-product-image').style.backgroundImage = `url('${product.image}')`;
+            
+            // Update add to cart button
+            const addToCartBtn = document.getElementById('add-to-cart-detail');
+            addToCartBtn.setAttribute('data-id', productId);
+            
+            productModal.style.display = 'flex';
+        }
+
+        // Helper function to get URL parameters
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
